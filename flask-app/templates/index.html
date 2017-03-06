@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3> 주문전송 테스트 </h3>
+<input id="order" value="1234"/>
+<button id="submit" type="button">주문번호 전송</button>
+<div>
+    <h4> 결과 : </h4>
+    <div id="result"></div>
+</div>
+</body>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script>
+
+    $("#submit").click(function(e){
+        $.ajax({
+            url:location.protocol + '//' + document.domain + ':' + location.port+"/api/order",
+            method:'POST',
+            data:{'order_num':$("#order").val()},
+            async:true,
+            success: function (result){
+                $("#result").text(result);
+            },
+            error:null,
+            complete:null
+        });
+    });
+</script>
+</html>
